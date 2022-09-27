@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Console\Commands;
+
+use App\DTOs\JsonHttpReaderDto;
+use App\Operations\AvailableOperations;
+use App\Services\JsonHttpReader;
+use App\Services\JsonReader;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
+
+class json_reader extends Command
+{
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'command:json-reader {action} {params?*}';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Reads json and applies action received as param with parameters received if needed';
+
+    private array $operationClasses;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return int
+     */
+    public function handle()
+    {
+        $offerCollection = (new JsonReader(new JsonHttpReader(), new JsonHttpReaderDto()))
+            ->read(Config::get("reader.json_file_path"));
+
+        print (new AvailableOperations($this->argument('params')))
+                ->getOperationInstance($this->argument('action'))
+                ->result($offerCollection) . PHP_EOL;
+    }
+}

@@ -15,9 +15,6 @@ class JsonReader implements ReaderInterface
     ) {
     }
 
-    /**
-     * "http://php_limpio/mock_file.json"
-     */
     public function read(string $input): OfferCollectionInterface
     {
         return new OfferCollection($this->getOffers($input));

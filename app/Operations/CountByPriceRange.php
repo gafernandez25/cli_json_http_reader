@@ -10,10 +10,11 @@ class CountByPriceRange implements CountOperationInterface
     private int $minRange;
     private int $maxRange;
 
-    public function __construct($params)
+    public function setParams(array $params): CountOperationInterface
     {
         $this->minRange = $params[0];
         $this->maxRange = $params[1];
+        return $this;
     }
 
     public function result(OfferCollectionInterface $offerCollection): int
@@ -25,6 +26,7 @@ class CountByPriceRange implements CountOperationInterface
                 $count++;
             }
         }
+
         return $count;
     }
 }

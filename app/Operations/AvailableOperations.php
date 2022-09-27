@@ -8,16 +8,16 @@ class AvailableOperations
 {
     private array $operations;
 
-    public function __construct(array $params)
+    public function __construct(private array $params)
     {
         $this->operations = [
-            "count_by_price_range" => new CountByPriceRange($params),
-            "count_by_vendor_id" => new CountByVendorId($params)
+            "count_by_price_range" => new CountByPriceRange(),
+            "count_by_vendor_id" => new CountByVendorId()
         ];
     }
 
     public function getOperationInstance(string $name): CountOperationInterface
     {
-        return $this->operations[$name];
+        return $this->operations[$name]->setParams($this->params);
     }
 }

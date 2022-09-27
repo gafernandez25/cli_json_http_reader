@@ -7,12 +7,24 @@ use App\Interfaces\OfferCollectionInterface;
 
 class CountByVendorId implements CountOperationInterface
 {
-    public function __construct(array $params)
+    private int $vendorId;
+
+    public function setParams(array $params): CountOperationInterface
     {
+        $this->vendorId = $params[0];
+        return $this;
     }
 
     public function result(OfferCollectionInterface $offerCollection): int
     {
-        return 1;
+        $count = 0;
+
+        foreach ($offerCollection->getIterator() as $offer) {
+            if ($offer->getVendorId() == $this->vendorId) {
+                $count++;
+            }
+        }
+
+        return $count;
     }
 }

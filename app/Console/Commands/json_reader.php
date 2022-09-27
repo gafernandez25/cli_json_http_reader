@@ -27,8 +27,9 @@ class json_reader extends Command
 
     private array $operationClasses;
 
-    public function __construct()
-    {
+    public function __construct(
+        private JsonReader $jsonReader,
+    ) {
         parent::__construct();
     }
 
@@ -39,8 +40,7 @@ class json_reader extends Command
      */
     public function handle()
     {
-        $offerCollection = (new JsonReader(new JsonHttpReader(), new JsonHttpReaderDto()))
-            ->read(Config::get("reader.json_file_path"));
+        $offerCollection = $this->jsonReader->read(Config::get("reader.json_file_path"));
 
         print (new AvailableOperations($this->argument('params')))
                 ->getOperationInstance($this->argument('action'))

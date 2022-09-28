@@ -42,8 +42,11 @@ class json_reader extends Command
     {
         $offerCollection = $this->jsonReader->read(Config::get("reader.json_file_path"));
 
-        print (new AvailableOperations($this->argument('params')))
-                ->getOperationInstance($this->argument('action'))
-                ->result($offerCollection) . PHP_EOL;
+        $operation = (new AvailableOperations())->getOperationInstance($this->argument('action'));
+
+        print $operation
+                ->setParams($this->argument('params'))
+                ->result($offerCollection)
+            . PHP_EOL;
     }
 }

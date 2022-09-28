@@ -9,9 +9,10 @@ class CountByVendorId implements CountOperationInterface
 {
     private int $vendorId;
 
-    public function setParams(array $params): CountOperationInterface
+    public function setParams(array $params): self
     {
         $this->vendorId = $params[0];
+
         return $this;
     }
 

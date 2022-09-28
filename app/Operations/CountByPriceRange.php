@@ -10,10 +10,11 @@ class CountByPriceRange implements CountOperationInterface
     private int $minRange;
     private int $maxRange;
 
-    public function setParams(array $params): CountOperationInterface
+    public function setParams(array $params): self
     {
         $this->minRange = $params[0];
         $this->maxRange = $params[1];
+
         return $this;
     }
 

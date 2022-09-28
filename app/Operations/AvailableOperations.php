@@ -8,7 +8,7 @@ class AvailableOperations
 {
     private array $operations;
 
-    public function __construct(private array $params)
+    public function __construct()
     {
         $this->operations = [
             "count_by_price_range" => new CountByPriceRange(),
@@ -18,6 +18,6 @@ class AvailableOperations
 
     public function getOperationInstance(string $name): CountOperationInterface
     {
-        return $this->operations[$name]->setParams($this->params);
+        return $this->operations[$name];
     }
 }

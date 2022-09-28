@@ -2,6 +2,7 @@
 
 namespace App\Operations;
 
+use App\Exceptions\OperationNotFoundException;
 use App\Interfaces\CountOperationInterface;
 
 class AvailableOperations
@@ -18,6 +19,9 @@ class AvailableOperations
 
     public function getOperationInstance(string $name): CountOperationInterface
     {
+        if(!isset($this->operations[$name])){
+            throw new OperationNotFoundException();
+        }
         return $this->operations[$name];
     }
 }

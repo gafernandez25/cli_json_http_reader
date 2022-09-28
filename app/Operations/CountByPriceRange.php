@@ -2,6 +2,7 @@
 
 namespace App\Operations;
 
+use App\Exceptions\MissingSomeParamException;
 use App\Interfaces\CountOperationInterface;
 use App\Interfaces\OfferCollectionInterface;
 
@@ -12,6 +13,9 @@ class CountByPriceRange implements CountOperationInterface
 
     public function setParams(array $params): self
     {
+        if (count($params) < 2) {
+            throw new MissingSomeParamException();
+        }
         $this->minRange = $params[0];
         $this->maxRange = $params[1];
 

@@ -23,9 +23,8 @@ class GetCount extends Command
      */
     protected $description = 'Reads json and applies action received as param with parameters received if needed';
 
-    public function __construct(
-        private JsonReader $jsonReader,
-    ) {
+    public function __construct(private JsonReader $jsonReader)
+    {
         parent::__construct();
     }
 
@@ -40,9 +39,12 @@ class GetCount extends Command
 
         $operation = (new AvailableOperations())->getOperationInstance($this->argument('action'));
 
-        print $operation
-                ->setParams($this->argument('params'))
-                ->result($offerCollection)
-            . PHP_EOL;
+        $result = $operation
+            ->setParams($this->argument('params'))
+            ->result($offerCollection);
+
+        $this->info($result);
+
+        return 0;
     }
 }

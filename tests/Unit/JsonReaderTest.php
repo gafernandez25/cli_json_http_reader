@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\DTOs\JsonHttpReaderDto;
 use App\Services\JsonHttpReader;
 use App\Services\JsonReader;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class JsonReaderTest extends TestCase
 {

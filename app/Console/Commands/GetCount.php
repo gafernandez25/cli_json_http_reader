@@ -2,21 +2,19 @@
 
 namespace App\Console\Commands;
 
-use App\DTOs\JsonHttpReaderDto;
 use App\Operations\AvailableOperations;
-use App\Services\JsonHttpReader;
 use App\Services\JsonReader;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 
-class json_reader extends Command
+class GetCount extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'command:json-reader {action} {params?*}';
+    protected $signature = 'get:number {action} {params?*}';
 
     /**
      * The console command description.
@@ -24,8 +22,6 @@ class json_reader extends Command
      * @var string
      */
     protected $description = 'Reads json and applies action received as param with parameters received if needed';
-
-    private array $operationClasses;
 
     public function __construct(
         private JsonReader $jsonReader,

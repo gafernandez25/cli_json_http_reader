@@ -11,14 +11,14 @@ All given sub-commands should only output quantity of objects that are in stock.
 For example:
 
 ```sh
-php artisan command:json-reader count_by_price_range 12.00 145.80
-php artisan command:json-reader count_by_vendor_id 42
+php artisan get:number count_by_price_range 12.00 145.80
+php artisan get:number count_by_vendor_id 42
 ```
 
 ### Interfaces
 
-Implement the ReaderInterface for fetching the JSON HTTP endpoint and thus work with the OfferCollectionInterface and Of
-ferInterface on the loaded data (see below). Feel free to adjust or extend interfaces if needed.
+Implement the ReaderInterface for fetching the JSON HTTP endpoint and thus work with the OfferCollectionInterface and 
+OfferInterface on the loaded data (see below). Feel free to adjust or extend interfaces if needed.
 
 ```sh
 /**
